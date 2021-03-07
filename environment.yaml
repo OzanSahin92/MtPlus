@@ -1,4 +1,4 @@
-name: ma+
+name: mtplus
 
 channels:
   - conda-forge
@@ -16,4 +16,4 @@ dependencies:
   - scipy
   - matplotlib
   - cartopy
-  - graph_tool
+  - graph-tool
