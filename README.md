@@ -1,10 +1,12 @@
 # Repository Description/General Info
 
-*
+* 
 *
 *
 
-# Requirements for python script
+# Requirements
+
+## Python
 
 * install conda with
 
@@ -55,10 +57,15 @@ conda deactivate
 
 ``` 
 
+## Data
+
+* data used for analyses and calculations can be requested at ozansahin92@gmail.com
+
 # TODOS
 
 ## Primary Tasks
 
+* calculate and subsequently save extreme event time series out of the slp time series
 * adjusting ES_numba.py to new spatially reduced data
 * running ES_numba.py with parallel_for_loop_es.sh on PIK cluster for taumax=2,8,16
 * adjusting scp.sh to get the calculated data from the PIK cluster
