@@ -1,0 +1,19 @@
+name: ma+
+
+channels:
+  - conda-forge
+  - anaconda
+  - defaults
+
+dependencies:
+  - python=3.7
+  - jupyterlab
+  - pandas
+  - numpy
+  - numba
+  - netCDF4
+  - mpi4py
+  - scipy
+  - matplotlib
+  - cartopy
+  - graph_tool
