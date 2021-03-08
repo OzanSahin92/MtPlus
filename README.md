@@ -1,6 +1,6 @@
 # Repository Description/General Info
 
-* 
+* CalculateExtremeEventTimeSeries.py takes the slp data and calculates extreme event time series based on the 5th percentile of slp in th months of november, december, january, february and march seperately
 *
 *
 
