@@ -134,7 +134,8 @@ def main():
     sign = float(sys.argv[2]) # f.e. 99.5
     goalDir = str(sys.argv[3]) # f.e. final_es/
     compoundmonths_ndjfm = 0
-    compoundmonths_ndjfm_daymean = 1
+    compoundmonths_ndjfm_daymean = 0
+    compoundmonths_ndjfm_daymean_spatially_reduced = 1
     if compoundmonths_ndjfm:
         #file_path = '/atm_glomod/user/osahin/data/ERA5/6hourlymean_1979-2019/EOFs_4dx4dy_ndjfm/'
         file_path = '/p/tmp/sahin/'
@@ -145,6 +146,13 @@ def main():
         #files to write
         file_es = 'es_reduced.4dx4dy.ndjfm.txt'
         #file_es_surrogate = 'es_surrogate_reduced.4dx4dy.ndjfm.txt'
+
+        dataset = netCDF4.Dataset(file_path + file_extreme2, 'r')   #r steht für read
+        var = dataset.variables['extreme_events'][:]
+        lats = dataset.variables['latitude'][:]
+        lons = dataset.variables['longitude'][:] 
+
+        dataset.close()
     
     elif compoundmonths_ndjfm_daymean:
         #file_path = '/atm_glomod/user/osahin/data/ERA5/daymean_1979-2019/NDJFM/'
@@ -173,21 +181,56 @@ def main():
             if counter == 366:
                 counter = 1
         time_steps_arr = np.array(time_steps)
-	
-    dataset = netCDF4.Dataset(file_path + file_extreme2, 'r')   #r steht für read
-    var = dataset.variables['extreme_events'][:]
-    lats = dataset.variables['latitude'][:]
-    lons = dataset.variables['longitude'][:] 
 
-    dataset.close()
+        dataset = netCDF4.Dataset(file_path + file_extreme2, 'r')   #r steht für read
+        var = dataset.variables['extreme_events'][:]
+        lats = dataset.variables['latitude'][:]
+        lons = dataset.variables['longitude'][:] 
+
+        dataset.close()
+
+    elif compoundmonths_ndjfm_daymean_spatially_reduced:
+        #file_path = '/atm_glomod/user/osahin/data/ERA5/daymean_1979-2019/NDJFM/'
+        file_path = '/p/tmp/sahin/'
+    
+        #file to read
+        #file_extreme = 'extreme.4dx4dy.19792019_nh_ndjfm_lon180180_daymean.nc'
+        #file_extreme = 'extreme.4dx4dy.19792019_nh_ndjfm_lon180180.nc' 
+        file_extreme2 = 'extreme.4dx4dy.19792019_nh_ndjfm_subseas_cell.txt'
+        
+    
+        #files to write
+        file_thresh = 'thresh_subseas.taumax'+taumax_str+'.4dx4dy.ndjfm.spatiallyReduced.txt'
+        file_es = 'es_subseas.taumax'+taumax_str+'.4dx4dy.ndjfm.spatiallyReduced.txt' 
+        file_sign_es = 'sign_es_subseas.taumax'+taumax_str+'.4dx4dy.ndjfm.spatiallyReduced.txt' 
+        file_num_of_events = 'num_of_events_subseas.taumax'+taumax_str+'.4dx4dy.ndjfm.spatiallyReduced.txt'
+        #file_es_surrogate = 'es_surrogate_thresh.95perc.taumax'+taumax_str+'.4dx4dy.ndjfm_test.txt'
+    
+        #time steps for NDJFM daily data from 1979-2019(JFM) with 14690 time steps in total and with 6130 time steps for only ndjfm
+        time_steps = []
+        counter = 0
+        for i in range(1,14691):
+            if counter <= 90 or counter > 304:
+                time_steps.append(i)
+            counter += 1
+            if counter == 366:
+                counter = 1
+        time_steps_arr = np.array(time_steps)
+
+        var = np.loadtxt(file_path + file_extreme2)
+	
 
     #var2 = var[:,:60,106:206] #var2 = var[:,:54,106:215] #reduzierte Daten  [:1000,:10,106:116]
 
-    n = var.shape[1]*var.shape[2]
-    #n = var2.shape[1]*var2.shape[2]
+    if compoundmonths_ndjfm or compoundmonths_ndjfm_daymean:
+        n = var.shape[1]*var.shape[2]
+        #n = var2.shape[1]*var2.shape[2]
 
-    data = np.reshape(var, (var.shape[0], n)).T
-    #data = np.reshape(var2, (var2.shape[0], n)).T  #reduzierte Fläche, die  in der nördlichen Hemisphäre den Nordatlantik, Skandinavien und das restliche Eopa beinhaltet
+        data = np.reshape(var, (var.shape[0], n)).T
+        #data = np.reshape(var2, (var2.shape[0], n)).T  #reduzierte Fläche, die  in der nördlichen Hemisphäre den Nordatlantik, Skandinavien und das restliche Eopa beinhaltet
+    elif compoundmonths_ndjfm_daymean_spatially_reduced:
+        n = var.shape[1]
+        data = var.T
 
     es = np.zeros((n,n),dtype=np.float32)
     sign_es = np.zeros((n,n),dtype=np.float32)
