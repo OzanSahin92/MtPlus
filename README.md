@@ -1,8 +1,9 @@
 # Repository Description/General Info
 
 * CalculateExtremeEventTimeSeries.py takes the slp data and calculates extreme event time series based on the 5th percentile of slp in th months of november, december, january, february and march seperately
-*
-*
+* ES_numba.py measures the event synchronization of the extreme event time series in parallel via mpi4py
+* ES_numba.py is written to run on a high performance cluster with the script SlurmParallelES.sh using the workload manager SLURM
+* getResultsOfCluster.sh gets the results of the high performance cluster
 
 # Requirements
 
@@ -65,11 +66,7 @@ conda deactivate
 
 ## Primary Tasks
 
-* calculate and subsequently save extreme event time series out of the slp time series
-* adjusting ES_numba.py to new spatially reduced data
-* running ES_numba.py with parallel_for_loop_es.sh on PIK cluster for taumax=2,8,16
-* adjusting scp.sh to get the calculated data from the PIK cluster
-* plotting ES maps and saving the adjacency matrices for taumax=2,8,16 wir ES_Extreme.ipynb
+* plotting ES maps and saving the adjacency matrices for taumax=2,8,16 with ES_Extreme.ipynb
 * sending JH the adjacecy matrices and the definitions of the CN measures used in Complex_network_analysis.ipynb
 
 ## Secondary Tasks
