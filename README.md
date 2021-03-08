@@ -1,6 +1,6 @@
 # Repository Description/General Info
 
-* CalculateExtremeEventTimeSeries.py takes the slp data and calculates extreme event time series based on the 5th percentile of slp in th months of november, december, january, february and march seperately
+* CalculateExtremeEventTimeSeries.py takes the slp data and calculates extreme event time series based on the 5th percentile of slp in the months of november, december, january, february and march seperately
 * ES_numba.py measures the event synchronization of the extreme event time series in parallel via mpi4py
 * ES_numba.py is written to run on a high performance cluster with the script SlurmParallelES.sh using the workload manager SLURM
 * getResultsOfCluster.sh gets the results of the high performance cluster
