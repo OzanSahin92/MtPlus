@@ -67,9 +67,9 @@ conda deactivate
 ## Primary Tasks
 
 * plotting ES maps and saving the adjacency matrices for taumax=2,8,16 with ES_Extreme.ipynb
-* sending JH the adjacecy matrices and the definitions of the CN measures used in Complex_network_analysis.ipynb
 
 ## Secondary Tasks
 
 * cleaning up the code and remove unnecessary parts
 * add comprehensive description of all parts of this repository and the code to README.md
+* organize repo based on https://towardsdatascience.com/organizing-machine-learning-projects-e4f86f9fdd9c
