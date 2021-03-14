@@ -66,7 +66,7 @@ conda deactivate
 
 ## Primary Tasks
 
-* plotting ES maps and saving the adjacency matrices for taumax=2,8,16 with ES_Extreme.ipynb
+* calculating complex network measures with new complex networks
 
 ## Secondary Tasks
 
