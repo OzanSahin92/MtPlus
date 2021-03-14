@@ -1,5 +1,8 @@
 # Repository Description/General Info
 
+* notebooks/ contains all jupyter lab notebooks of this repository
+* src/ contains all .py files of this repository
+* output/ contains the plotted maps and different outputs of the notebooks and the .py files
 * CalculateExtremeEventTimeSeries.py takes the slp data and calculates extreme event time series based on the 5th percentile of slp in the months of november, december, january, february and march seperately
 * ES_numba.py measures the event synchronization of the extreme event time series in parallel via mpi4py
 * ES_numba.py is written to run on a high performance cluster with the script SlurmParallelES.sh using the workload manager SLURM
@@ -70,6 +73,8 @@ conda deactivate
 
 ## Secondary Tasks
 
-* cleaning up the code and remove unnecessary parts
+* add links to data in f.e. dataLinks.txt in input/
+* expand the script getResultsOfCluster.sh to get all data and create one single sparse matrix file with new .py file in output/ for taumax= 2,8,16 respectively
+* clean up the code and remove unnecessary parts
 * add comprehensive description of all parts of this repository and the code to README.md
 * organize repo based on https://towardsdatascience.com/organizing-machine-learning-projects-e4f86f9fdd9c
