@@ -1,6 +1,4 @@
-Complex_network_analysis.ipynb
-5thPercentileThreshholdsSepMonths.ipynb
-testingData.ipynb
 .ipynb_checkpoints/
-input/
+data/*
+!data/*.png
 .vscode/
