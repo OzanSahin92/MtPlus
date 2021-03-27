@@ -4,6 +4,7 @@
 import numpy as np
 import netCDF4
 
+
 def main():
     data_path = 'Data/'
     # read
@@ -11,13 +12,12 @@ def main():
     # write
     extreme_event_data = 'extreme.4dx4dy.19792019_nh_ndjfm_subseas_cell.txt'
 
-
-    dataset = netCDF4.Dataset(data_path+slp_data, 'r')
+    dataset = netCDF4.Dataset(data_path + slp_data, 'r')
     # extract the raw data out of the dataset
     var = dataset.variables['var1'][:].data
 
-    # separate the data into the seperate months of january, february, march, november and december
-    # to calculate the 5th percentile threshholds of the seperate months
+    # separate the data into the separate months of january, february, march, november and december
+    # to calculate the 5th percentile thresholds of the separate months
     nov = []
     dec = []
     jan = []
@@ -26,53 +26,54 @@ def main():
 
     counter = 1
     for day in var:
-        if counter<=31:
+        if counter <= 31:
             jan.append(day)
-        elif counter>31 and counter<=59:
+        elif 31 < counter <= 59:
             feb.append(day)
-        elif counter>59 and counter<=90:
+        elif 59 < counter <= 90:
             mar.append(day)
-        elif counter>90 and counter<=120:
+        elif 90 < counter <= 120:
             nov.append(day)
         else:
             dec.append(day)
-        counter+=1
-        if counter==152:
-            counter=1
+        counter += 1
+        if counter == 152:
+            counter = 1
 
-    janArr = np.array(jan) 
-    febArr = np.array(feb) 
-    marArr = np.array(mar)
-    novArr = np.array(nov)
-    decArr = np.array(dec)
+    jan_arr = np.array(jan)
+    feb_arr = np.array(feb)
+    mar_arr = np.array(mar)
+    nov_arr = np.array(nov)
+    dec_arr = np.array(dec)
 
-    jan5thPerc = np.percentile(janArr, 5, axis=0)
-    feb5thPerc = np.percentile(febArr, 5, axis=0)
-    mar5thPerc = np.percentile(marArr, 5, axis=0)
-    nov5thPerc = np.percentile(novArr, 5, axis=0)
-    dec5thPerc = np.percentile(decArr, 5, axis=0)
+    jan5th_perc = np.percentile(jan_arr, 5, axis=0)
+    feb5th_perc = np.percentile(feb_arr, 5, axis=0)
+    mar5th_perc = np.percentile(mar_arr, 5, axis=0)
+    nov5th_perc = np.percentile(nov_arr, 5, axis=0)
+    dec5th_perc = np.percentile(dec_arr, 5, axis=0)
 
-    # identify extreme events with the seperate thresholds and create an extreme event time series
+    # identify extreme events with the separate thresholds and create an extreme event time series
     extreme_event_bool = []
     counter = 1
     for day in var:
-        if counter<=31:
-            extreme_event_bool.append(day < jan5thPerc)
-        elif counter>31 and counter<= 59:
-            extreme_event_bool.append(day < feb5thPerc)
-        elif counter>59 and counter<=90:
-            extreme_event_bool.append(day < mar5thPerc)
-        elif counter>90 and counter<=120:
-            extreme_event_bool.append(day < nov5thPerc)
+        if counter <= 31:
+            extreme_event_bool.append(day < jan5th_perc)
+        elif 31 < counter <= 59:
+            extreme_event_bool.append(day < feb5th_perc)
+        elif 59 < counter <= 90:
+            extreme_event_bool.append(day < mar5th_perc)
+        elif 90 < counter <= 120:
+            extreme_event_bool.append(day < nov5th_perc)
         else:
-            extreme_event_bool.append(day < dec5thPerc)
-        counter+=1
-        if counter==152:
-            counter=1
-        
-    extremeEventArr = np.array(extreme_event_bool).astype('int')
+            extreme_event_bool.append(day < dec5th_perc)
+        counter += 1
+        if counter == 152:
+            counter = 1
 
-    np.savetxt(data_path+extreme_event_data, extremeEventArr)
+    extreme_event_arr = np.array(extreme_event_bool).astype('int')
 
-if __name__== "__main__":
+    np.savetxt(data_path + extreme_event_data, extreme_event_arr)
+
+
+if __name__ == "__main__":
     main()
