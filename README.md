@@ -84,3 +84,4 @@ conda deactivate
 * clean up the code and remove unnecessary parts
 * add comprehensive description of all parts of this repository and the code to README.md
 * organize repo based on https://towardsdatascience.com/organizing-machine-learning-projects-e4f86f9fdd9c
+* https://stackoverflow.com/questions/44954636/plotting-a-2d-contour-plot-in-python-with-sparse-data may help to plot the complex networks
