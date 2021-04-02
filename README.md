@@ -76,6 +76,8 @@ conda deactivate
 ## Primary Tasks
 
 * calculating complex network measures with new complex networks
+* plot the nsi complex network measures in a new notebook specifically for the nsi measures
+* plot es maps by interpolating and compare to already plottest es maps
 
 ## Secondary Tasks
 
@@ -83,5 +85,3 @@ conda deactivate
 * expand the script getResultsOfCluster.sh to get all data and create one single sparse matrix file with new .py file in output/ for taumax= 2,8,16 respectively
 * clean up the code and remove unnecessary parts
 * add comprehensive description of all parts of this repository and the code to README.md
-* organize repo based on https://towardsdatascience.com/organizing-machine-learning-projects-e4f86f9fdd9c
-* https://stackoverflow.com/questions/44954636/plotting-a-2d-contour-plot-in-python-with-sparse-data may help to plot the complex networks
