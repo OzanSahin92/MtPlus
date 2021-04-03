@@ -75,7 +75,6 @@ conda deactivate
 
 ## Primary Tasks
 
-* calculating complex network measures with new complex networks
 * plot the nsi complex network measures in a new notebook specifically for the nsi measures
 * plot es maps by interpolating and compare to already plottest es maps
 
