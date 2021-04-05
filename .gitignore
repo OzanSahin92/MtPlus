@@ -3,4 +3,3 @@ data/*
 !data/*.png
 .vscode/
 .idea/
-Complex_network_analysis.ipynb

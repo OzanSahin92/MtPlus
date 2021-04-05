@@ -76,7 +76,7 @@ conda deactivate
 ## Primary Tasks
 
 * plot the nsi complex network measures in a new notebook specifically for the nsi measures
-* plot es maps by interpolating and compare to already plottest es maps
+* plot composite plots for SPKAZ, SPRUS, SPAM, PASP, ASP, WESP (if still visible as a significant connection?)
 
 ## Secondary Tasks
 
