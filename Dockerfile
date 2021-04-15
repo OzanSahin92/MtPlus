@@ -5,7 +5,8 @@ SHELL [ "/bin/bash", "--login", "-c" ]
 RUN  apt-get update --quiet --yes \
   && apt-get install --quiet --yes --no-install-recommends \
   apt-utils \
-  wget 
+  wget \
+  libxi6:amd64
 
 RUN rm -rf /var/lib/apt/lists/*
 
