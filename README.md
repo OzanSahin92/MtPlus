@@ -72,3 +72,5 @@ conda deactivate
 # TODOS
 
 * plot composite plots for SPKAZ, SPRUS, SPAM, PASP, ASP, WESP (if still visible as a significant connection?)
+
+* add docker

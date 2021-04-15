@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  jupyterlab-server-mtplus:
+    build:
+      args:
+        - username=mtplus
+        - uid=1000
+        - gid=100
+      context: ../
+      dockerfile: MtPlus/Dockerfile
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./src:/home/mtplus/project/src
+      - ./notebooks:/home/mtplus/project/notebooks
+      - ./data:/home/mtplus/project/data
+    init: true
+    stdin_open: true
+    tty: true
