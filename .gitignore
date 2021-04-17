@@ -3,3 +3,4 @@ data/*
 !data/*.png
 .vscode/
 .idea/
+__pycache__/

@@ -1,21 +1,12 @@
-#!/usr/bin/env python
-# coding: utf-8
-
 import numpy as np
 import netCDF4
 
 
-def main():
-    data_path = 'Data/'
-    # read
-    slp_data = 'slp.4dx4dy.nh_ndjfm_19792019_subseas_cell.nc'
-    # write
-    extreme_event_data = 'extreme.4dx4dy.19792019_nh_ndjfm_subseas_cell.txt'
-
-    dataset = netCDF4.Dataset(data_path + slp_data, 'r')
-    # extract the raw data out of the dataset
-    var = dataset.variables['var1'][:].data
-
+# taking into account that seasonality plays a role in the slp levels, therefore we calculate te slp threshhold for
+# extreme events for every single month in winter extracting extreme events out of the slp data by identifying slp
+# under the 5th perc as a cyclone
+def extreme_events(
+        time_series):  # daily time series, which begin in january and only consists of the months j, f, m,  n, d
     # separate the data into the separate months of january, february, march, november and december
     # to calculate the 5th percentile thresholds of the separate months
     nov = []
@@ -25,7 +16,7 @@ def main():
     mar = []
 
     counter = 1
-    for day in var:
+    for day in time_series:
         if counter <= 31:
             jan.append(day)
         elif 31 < counter <= 59:
@@ -55,7 +46,7 @@ def main():
     # identify extreme events with the separate thresholds and create an extreme event time series
     extreme_event_bool = []
     counter = 1
-    for day in var:
+    for day in time_series:
         if counter <= 31:
             extreme_event_bool.append(day < jan5th_perc)
         elif 31 < counter <= 59:
@@ -72,7 +63,25 @@ def main():
 
     extreme_event_arr = np.array(extreme_event_bool).astype('int')
 
-    np.savetxt(data_path + extreme_event_data, extreme_event_arr)
+    return extreme_event_arr
+
+
+def main():
+    data_path = '../data/'
+    # read
+    slp_data = 'slp.4dx4dy.nh_ndjfm_19792019_subseas_cell.nc'
+    # write
+    extreme_event_data = 'extreme.4dx4dy.19792019_nh_ndjfm_subseas_cell.txt'
+
+    dataset = netCDF4.Dataset(data_path + slp_data, 'r')
+    # extract the raw data out of the dataset
+    var = dataset.variables['var1'][:].data
+
+    extreme_event_arr = extreme_events(var)
+
+    print(extreme_event_arr.shape, '\n', extreme_event_arr.sum(axis=0), '\n', extreme_event_arr)
+
+    #np.savetxt(data_path + extreme_event_data, extreme_event_arr)
 
 
 if __name__ == "__main__":

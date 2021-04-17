@@ -146,6 +146,20 @@ def es_loop(clean_data, es, sign_es, size, rank, ts1, ts2, d,
     return es, sign_es
 
 
+def get_timesteps():
+    # time steps for NDJFM daily data from 1979-2019(JFM) with 14690 time steps in total and with 6130 time steps
+    # for only ndjfm
+    time_steps = []
+    counter = 0
+    for i in range(1, 14691):
+        if counter <= 90 or counter > 304:
+            time_steps.append(i)
+        counter += 1
+        if counter == 366:
+            counter = 1
+    return np.array(time_steps)
+
+
 def main():
     taumax_str = sys.argv[1]
     taumax = int(sys.argv[1])  # f.e. 16
@@ -188,17 +202,7 @@ def main():
         file_num_of_events = 'num_of_events_subseas.taumax' + taumax_str + '.4dx4dy.ndjfm.txt'
         # file_es_surrogate = 'es_surrogate_thresh.95perc.taumax'+taumax_str+'.4dx4dy.ndjfm_test.txt'
 
-        # time steps for NDJFM daily data from 1979-2019(JFM) with 14690 time steps in total and with 6130 time steps
-        # for only ndjfm
-        time_steps = []
-        counter = 0
-        for i in range(1, 14691):
-            if counter <= 90 or counter > 304:
-                time_steps.append(i)
-            counter += 1
-            if counter == 366:
-                counter = 1
-        time_steps_arr = np.array(time_steps)
+        time_steps_arr = get_timesteps()
 
         dataset = netCDF4.Dataset(file_path + file_extreme2, 'r')  # r steht für read
         var = dataset.variables['extreme_events'][:]
