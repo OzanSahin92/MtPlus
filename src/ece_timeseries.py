@@ -81,7 +81,7 @@ def main():
 
     print(extreme_event_arr.shape, '\n', extreme_event_arr.sum(axis=0), '\n', extreme_event_arr)
 
-    #np.savetxt(data_path + extreme_event_data, extreme_event_arr)
+    np.savetxt(data_path + extreme_event_data, extreme_event_arr)
 
 
 if __name__ == "__main__":

@@ -228,7 +228,7 @@ def main():
         # file_es_surrogate = 'es_surrogate_thresh.95perc.taumax'+taumax_str+'.4dx4dy.ndjfm_test.txt'
 
         # time steps for NDJFM daily data from 1979-2019(JFM) with 14690 time steps in total and with 6130 time steps
-        # for only ndjfm
+        # for only NDJFM
         time_steps = []
         counter = 0
         for i in range(1, 14691):
@@ -240,16 +240,16 @@ def main():
         time_steps_arr = np.array(time_steps)
 
         var = np.loadtxt(file_path + file_extreme2)
-
-    # var2 = var[:,:60,106:206] #var2 = var[:,:54,106:215] #reduzierte Daten  [:1000,:10,106:116]
+        # reduced data [:1000,:10,106:116]
+        # var2 = var[:,:60,106:206] #var2 = var[:,:54,106:215]
 
     if compoundmonths_ndjfm or compoundmonths_ndjfm_daymean:
         n = var.shape[1] * var.shape[2]
         # n = var2.shape[1]*var2.shape[2]
 
         data = np.reshape(var, (var.shape[0], n)).T
-        # data = np.reshape(var2, (var2.shape[0], n)).T  #reduzierte Fläche, die  in der nördlichen Hemisphäre den
-        # Nordatlantik, Skandinavien und das restliche Eopa beinhaltet
+        # reduced area containing north america, scandinavia and the rest of europe
+        # data = np.reshape(var2, (var2.shape[0], n)).T
     elif compoundmonths_ndjfm_daymean_spatially_reduced:
         n = var.shape[1]
         data = var.T
@@ -266,7 +266,7 @@ def main():
     clean_data = clean_consecutive_events(data, time_steps_arr)
     del data
 
-    # creating a dictionary that has es-threshhold values for every combination of number of events in timeseries
+    # creating a dictionary that has es-threshold values for every combination of number of events in time series
     num_of_events = np.unique(clean_data.sum(axis=1))
     thresh = np.zeros((num_of_events.shape[0], num_of_events.shape[0]), dtype=np.float32)
     thresh_val = treshhold_params(thresh, es_surrogate_i_j, es_surrogate_j_i, num_of_events, time_steps_arr,
@@ -279,7 +279,7 @@ def main():
     # dictionary that is understandable for numba, because it is typed
     d = Dict.empty(key_type=types.float32, value_type=types.float32)
 
-    # filling the numby dict with the threshold dict keys and values
+    # filling the numba dict with the threshold dict keys and values
     for k, v in thresh_flat_dict.items():
         d[k] = v
 
