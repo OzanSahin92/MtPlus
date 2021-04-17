@@ -22,7 +22,6 @@
  wget https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh
 
  bash Anaconda3-2020.11-Linux-x86_64.sh
-
 ```
 
 * after that, the following should be in .bashrc
@@ -42,27 +41,23 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
 ```
-* this could lead to conda activaing automatically, which can be stopped with the following command
+* this could lead to conda activating automatically, which can be stopped with the following command
 
 ```
 conda config --set auto_activate_base false
-
 ```
 
-* now, create a conda env based on environment.yaml and the installation dependencies in it
+* now, create a conda env based on environment.yml and the installation dependencies in it
 
 ```
-conda env create -f environment.yaml
-
+conda env create -f environment.yml
 ```
 * the created env can now be activated or deactivated
 ```
 conda activate <name of env in environment.yml>
 
 conda deactivate
-
 ``` 
 
 ## Data
@@ -72,5 +67,3 @@ conda deactivate
 # TODOS
 
 * plot composite plots for SPKAZ, SPRUS, SPAM, PASP, ASP, WESP (if still visible as a significant connection?)
-
-* add docker
