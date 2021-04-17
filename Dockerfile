@@ -6,7 +6,11 @@ RUN  apt-get update --quiet --yes \
   && apt-get install --quiet --yes --no-install-recommends \
   apt-utils \
   wget \
-  libxi6:amd64
+  libxi6:amd64 \
+  libxfixes3:amd64 \
+  libxcursor1:amd64 \
+  libxdamage1:amd64 \
+  libxcomposite1:amd64
 
 RUN rm -rf /var/lib/apt/lists/*
 
