@@ -121,6 +121,7 @@ def main():
         grid_cells_path = 'grid_cell.txt'
         # write
         teleconnection_eces_file = '_ECEs_times.txt'
+        regional_ece_timeseries_file = '_clean_ece_timeserie.txt'
 
         slp_data = read_nc_data(data_path + slp_data_path).T
         lats_lons = get_lats_lons(data_path + grid_cells_path)
@@ -135,7 +136,8 @@ def main():
             region_eces = extreme_events(region)
 
             region_name = 'Arabian Sea'
-            region_str = 'ASP'
+            teleconnection_str = 'ASP'
+            region_str = 'arabiansea'
             region_to_spitsbergen = 1
             spitsbergen_to_region = 0
 
@@ -145,7 +147,8 @@ def main():
             region_eces = extreme_events(region)
 
             region_name = 'Westafrica'
-            region_str = 'WESP'
+            teleconnection_str = 'WESP'
+            region_str = 'westafrica'
             region_to_spitsbergen = 1
             spitsbergen_to_region = 0
 
@@ -155,7 +158,8 @@ def main():
             region_eces = extreme_events(region)
 
             region_name = 'Pacific'
-            region_str = 'PASP'
+            teleconnection_str = 'PASP'
+            region_str = 'pacific'
             region_to_spitsbergen = 1
             spitsbergen_to_region = 0
 
@@ -165,7 +169,8 @@ def main():
             region_eces = extreme_events(region)
 
             region_name = 'Kazakhstan'
-            region_str = 'SPKAZ'
+            teleconnection_str = 'SPKAZ'
+            region_str = 'kazakhstan'
             region_to_spitsbergen = 0
             spitsbergen_to_region = 1
 
@@ -175,7 +180,8 @@ def main():
             region_eces = extreme_events(region)
 
             region_name = 'Northwest Russia'
-            region_str = 'SPRUS'
+            teleconnection_str = 'SPRUS'
+            region_str = 'northwestrussia'
             region_to_spitsbergen = 0
             spitsbergen_to_region = 1
 
@@ -186,7 +192,8 @@ def main():
             region_eces = extreme_events(region)
 
             region_name = 'North America'
-            region_str = 'SPAM'
+            teleconnection_str = 'SPAM'
+            region_str = 'northamerica'
             region_to_spitsbergen = 0
             spitsbergen_to_region = 1
 
@@ -208,7 +215,9 @@ def main():
 
         print('Teleconnection (Spitsbergen and ', region_name, ') ECE times :', teleconnection_ece_times)
 
-        np.savetxt(data_path+region_str+teleconnection_eces_file, teleconnection_ece_times,  fmt='%i')
+        np.savetxt(data_path + region_str + regional_ece_timeseries_file, clean_eces_region, fmt='%i')
+        np.savetxt(data_path + 'spitsbergen' + regional_ece_timeseries_file, clean_eces_spitsbergen, fmt='%i')
+        np.savetxt(data_path + teleconnection_str + teleconnection_eces_file, teleconnection_ece_times, fmt='%i')
 
 
 if __name__ == "__main__":
