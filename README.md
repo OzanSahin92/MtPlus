@@ -62,7 +62,7 @@ conda deactivate
 
 ## Data
 
-* data used for analyses and calculations can be requested at ozansahin92@gmail.com
+* data used for analyses and calculations can be downloaded via the link in data/link_to_data.txt
 
 # TODOS
 
