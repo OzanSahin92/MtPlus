@@ -63,7 +63,3 @@ conda deactivate
 ## Data
 
 * data used for analyses and calculations can be downloaded via the link in data/link_to_data.txt
-
-# TODOS
-
-* plot composite plots for SPKAZ, SPRUS, SPAM, PASP, ASP, WESP (if still visible as a significant connection?)
