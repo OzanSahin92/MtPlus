@@ -1,6 +1,6 @@
 .ipynb_checkpoints/
 data/*
-!data/*.png
+!data/link_to_data.txt
 .vscode/
 .idea/
 __pycache__/
